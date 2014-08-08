@@ -23,7 +23,13 @@ where /data is your volumename
 download bsinfoI and bsinfoP
 make them executable:
 
-    chmod +x bsinfo*
+    wget https://raw.githubusercontent.com/kossboss/bsinfo/master/bsinfoI
+    wget https://raw.githubusercontent.com/kossboss/bsinfo/master/bsinfoP
+    chmod +x bsinfoI
+    chmod +x bsinfoP
+    
+example of use:
+
     ./bsinfoI /data
     ./bsinfoP /data
 
