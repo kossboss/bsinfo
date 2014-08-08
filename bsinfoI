@@ -1,0 +1,48 @@
+#!/bin/bash
+# usage: bsinfoI <volumename>
+# example: bsinfoI /data
+# disclaimer: for looks dont put a slash at the end of the volumename, e.g. use /data instead of /data/
+# disclaimer: make sure to only use the absolute path of the volume
+# disclaimer: use absolute path of volume and not the absolute path of any of its subvolumes (or else output paths look weird)
+# btrfs snapshot space - sorted by ID
+# output units: M as in MiB or Megabytes (binary - where 1 K = 1024 bytes)
+# needed programs: btrfs qgroup, btrfs subvolume, grep, awk, sed, echo, if, and test with [
+# works with Bash 4.2.37, Btrfs v3.14.2
+# ---------- #
+# more info:
+# ---------- #
+# The snapshot path information is grabbed from the output of "btrfs subvolume list -p --sort=path /data"
+# The snapshot size information is grabbed from the output of "btrfs qgroup show /data"
+# For this to work you might need to have btrfs quota globally enabled on your btrfs volume.
+# To enable btrfs quotas just type:
+# $ btrfs quota enable /data
+# where /data is your volumename
+#######################
+VOL1="$1"
+if [ -z $VOL1 ]; then echo "usage: $0 <volumename>"; exit -1; fi;
+(QOUT1=`btrfs qgroup show $VOL1 | tail -n +3` # tail part removes the top 2 lines which are just column headers
+BOUT1=`btrfs subvolume list -p --sort=path $VOL1`
+OLDIFS=$IFS
+IFS=$'\n'
+DEFAULT1="...n/a..."
+#######################
+echo "id ref(MB) excl(MB) path" | awk '{printf "%-9s %-15s %-15s %-12s\n", $1, $2, $3, $4}' 
+echo "---- ------ ------- -----" | awk '{printf "%-9s %-15s %-15s %-12s\n", $1, $2, $3, $4}' 
+#######################
+for i in $QOUT1; do
+QLINE1=$i
+ID2=`echo $QLINE1 | awk '{print $1}'`
+BSID3=`echo $ID2 | awk -F/ '{print $2}'`
+BLINE3=`echo "$BOUT1" | grep "^ID $BSID3 gen"`
+BSNAP3=`echo $BLINE3 | sed -n 's/^.*top level [0-9]* path \(.*\)$/\1/p'`
+if [ -z $BSNAP3 ]; then
+BSNAP3=$DEFAULT1
+else
+BSNAP3=$VOL1/$BSNAP3
+fi
+REF2=`echo $QLINE1 | awk '{print $2}'`
+EXCL2=`echo $QLINE1 | awk '{print $3}'`
+echo $ID2 $REF2 $EXCL2 $BSNAP3 | awk '{printf "%-9s %-15.2f %-15.2f %-12s\n", $1, $2/1024/1024, $3/1024/1024, $4}' 
+done
+#######################
+IFS=$OLDIFS)
