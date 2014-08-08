@@ -14,7 +14,7 @@ This next part is in the comments of both bsinfoI and bsinfoP, however its impor
 The snapshot path information is grabbed from the output of "**btrfs subvolume list -p --sort=path /data**"
 The snapshot size information is grabbed from the output of "**btrfs qgroup show /data**"
 For this to work you might need to have btrfs quota globally enabled on your btrfs volume.
-To enable btrfs quotas just type:
+To enable btrfs quotas just type this:
 $ btrfs quota enable /data
 where /data is your volumename
 
