@@ -17,7 +17,7 @@
 # To enable btrfs quotas just type:
 # $ btrfs quota enable /data
 # where /data is your volumename
-#######################
+########################
 VOL1="$1"
 if [ -z $VOL1 ]; then echo "usage: $0 <volumename>"; exit -1; fi;
 (QOUT1=`btrfs qgroup show $VOL1 | tail -n +3` # tail part removes the top 2 lines which are just column headers
@@ -25,10 +25,10 @@ BOUT1=`btrfs subvolume list -p --sort=path $VOL1`
 OLDIFS=$IFS
 IFS=$'\n'
 DEFAULT1="...n/a..."
-#######################
+########################
 echo "id ref(MB) excl(MB) path" | awk '{printf "%-9s %-15s %-15s %-12s\n", $1, $2, $3, $4}' 
 echo "---- ------ ------- -----" | awk '{printf "%-9s %-15s %-15s %-12s\n", $1, $2, $3, $4}' 
-#######################
+########################
 for i in $QOUT1; do
 QLINE1=$i
 ID2=`echo $QLINE1 | awk '{print $1}'`
@@ -44,5 +44,5 @@ REF2=`echo $QLINE1 | awk '{print $2}'`
 EXCL2=`echo $QLINE1 | awk '{print $3}'`
 echo $ID2 $REF2 $EXCL2 $BSNAP3 | awk '{printf "%-9s %-15.2f %-15.2f %-12s\n", $1, $2/1024/1024, $3/1024/1024, $4}' 
 done
-#######################
+########################
 IFS=$OLDIFS)
