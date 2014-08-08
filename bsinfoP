@@ -17,6 +17,13 @@
 # To enable btrfs quotas just type:
 # $ btrfs quota enable /data
 # where /data is your volumename
+# ------------ #
+# to download: #
+# ------------ #
+# wget https://raw.githubusercontent.com/kossboss/bsinfo/master/bsinfoI
+# wget https://raw.githubusercontent.com/kossboss/bsinfo/master/bsinfoP
+# chmod +x bsinfoI
+# chmod +x bsinfoP
 ########################
 VOL1="$1"
 if [ -z $VOL1 ]; then echo "usage: $0 <volumename>"; exit -1; fi;
