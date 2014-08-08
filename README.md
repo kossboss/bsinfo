@@ -20,7 +20,7 @@ where /data is your volumename
 
 ### HOW TO USE
 
-download bsinfoI and bsinfoP
+download bsinfoI and bsinfoP  
 make them executable:
 
     wget https://raw.githubusercontent.com/kossboss/bsinfo/master/bsinfoI
