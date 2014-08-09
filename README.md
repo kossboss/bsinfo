@@ -94,3 +94,9 @@ where /data is your volume name
     0/10497   0.00            0.00            /Sally/readydrop/.snapshots
     0/10498   3956.95         0.01            /Sally/readydrop/.snapshots/1/snapshot
 
+**HOW TO UNDERSTAND SNAPSHOT SPACE**
+
+**REF** - referenced space is the space that is the same between the snapshots/subvolumes (think of COW/copy-on-write to help understand it - COW filesystems always writes in new spots, new blocks go elsewhere. Imageine a file README.txt that you never delete, but you had since day 1, that files size will be references in all of the snapshots/subvols)
+
+**EXCL** - exclusive space that is unique to that snapshot (think of COW/copy-on-write to help understand it - imagine you deleted data that existed on current data set, and the previous snapshot, the data will no longer exist in current dataset, but it will exist in previous snapshot, it will be counted here in exclusive space of that previous snapshot)
+
