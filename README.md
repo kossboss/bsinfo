@@ -1,5 +1,7 @@
 ## bsinfo - BTRFS SNAPSHOT INFORMATION
 
+## Language: bash - works and complete
+
 Here is an attempt to use the method on this site http://dustymabe.com/2013/09/22/btrfs-how-big-are-my-snapshots/ to calculate the size of btrfs snapshots
 
 Authors attempt only shows IDs, so in this version of output the snapshot paths are included. There are 2 formats of the scripts (should of just added an argument option isntead of having 2 different script, but whocares... maybe ill change it later)
