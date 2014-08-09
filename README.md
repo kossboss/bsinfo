@@ -1,6 +1,6 @@
 ## bsinfo - BTRFS SNAPSHOT INFORMATION
 
-## LANGUAGE: bash - STATUS: works and complete
+**LANGUAGE: bash - STATUS: works and complete**
 
 Here is an attempt to use the method on this site http://dustymabe.com/2013/09/22/btrfs-how-big-are-my-snapshots/ to calculate the size of btrfs snapshots
 
