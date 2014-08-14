@@ -33,7 +33,7 @@ make them executable:
 if get errors on none-trust (because its github) use this:
 
     wget --no-check-certificate https://raw.githubusercontent.com/kossboss/bsinfo/master/bsinfoI
-    wget  --no-check-certificate https://raw.githubusercontent.com/kossboss/bsinfo/master/bsinfoP
+    wget --no-check-certificate https://raw.githubusercontent.com/kossboss/bsinfo/master/bsinfoP
     chmod +x bsinfoI
     chmod +x bsinfoP
     
